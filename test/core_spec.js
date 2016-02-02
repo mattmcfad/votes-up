@@ -124,6 +124,27 @@ describe('application logic', () => {
       }));
     });
 
+    it('ignore votes for entries not in the current pair', () => {
+      const state = Map({
+        pair: List.of('Woodford Reserve', 'Blanton’s Original'),
+        tally: Map({
+          'Woodford Reserve': 3,
+          'Blanton’s Original': 2
+        })
+      });
+
+      const nextState = vote(state, 'Jim Beam');
+
+      expect(nextState).to.equal(Map({
+        pair: List.of('Woodford Reserve', 'Blanton’s Original'),
+        tally: Map({
+          'Woodford Reserve': 3,
+          'Blanton’s Original': 2
+        })
+      }));
+
+    });
+
   });
 
 });
